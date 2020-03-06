@@ -80,7 +80,7 @@ CostVolume::CostVolume(Mat image, FrameID _fid, int _layers, float _near,
 
     Mat bwImage;
     image=image.reshape(0,1);
-    cv::cvtColor(image, bwImage, CV_RGB2GRAY);
+    cv::cvtColor(image, bwImage, cv::COLOR_RGB2GRAY);
     baseImage.upload(image);
     baseImageGray.upload(bwImage);
     baseImage=baseImage.reshape(0,rows);
@@ -183,16 +183,16 @@ void CostVolume::updateCost(const Mat& _image, const cv::Mat& R, const cv::Mat& 
                 cBuffer.create(_image.rows,_image.cols,CV_8UC4);
                 Mat cm=cBuffer;//.createMatHeader();
                 if(_image.type()==CV_8UC1||_image.type()==CV_8SC1){
-                    cv::cvtColor(_image,cm,CV_GRAY2BGRA);
+                    cv::cvtColor(_image,cm,cv::COLOR_GRAY2BGRA);
                 }else if(_image.type()==CV_8UC3||_image.type()==CV_8SC3){
-                    cv::cvtColor(_image,cm,CV_BGR2BGRA);
+                    cv::cvtColor(_image,cm,cv::COLOR_BGR2BGRA);
                 }else{
                     image=_image;
                     if(_image.channels()==1){
-                        cv::cvtColor(image,image,CV_GRAY2BGRA);
+                        cv::cvtColor(image,image,cv::COLOR_GRAY2BGRA);
                     }
                     if(_image.channels()==3){
-                        cv::cvtColor(image,image,CV_BGR2BGRA);
+                        cv::cvtColor(image,image,cv::COLOR_BGR2BGRA);
                     }
                     //image is now 4 channel, unknown depth but not 8 bit
                     if(_image.depth()>=5){//float

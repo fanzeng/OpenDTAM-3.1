@@ -108,13 +108,13 @@ void guiLoop(int* die){
             mat.convertTo(mat,CV_MAKETYPE(CV_8U,mat.channels()), 255.0);//use 8 bit so we can have the nice mouse over
             if(mat.rows<250){
                 name+=":small";
-                namedWindow(name, CV_WINDOW_KEEPRATIO | CV_GUI_NORMAL);
+                namedWindow(name, WINDOW_KEEPRATIO);
             }
             imshow( name, mat);
             waitKey(1);//waitkey must occur here so matrix doesn't fall out of scope because imshow is dumb that way :(
 //            cout<<name<<" queue:"<<ready<<endl;
         }else if(pausing){
-            namedWindow("control",CV_WINDOW_KEEPRATIO);
+            namedWindow("control",WINDOW_KEEPRATIO);
             cout<<"Paused: Space (in GUI window) to continue"<<endl;
             while(waitKey()!=' ');
             

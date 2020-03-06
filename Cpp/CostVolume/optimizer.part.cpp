@@ -93,7 +93,7 @@ void Cost::cacheGValues(){
     float* gl=(float*)(_gl.data);
     float* gr=(float*)(_gr.data);
     Mat im_gray;
-    cvtColor(baseImage,im_gray,CV_RGB2GRAY);
+    cvtColor(baseImage,im_gray,cv::COLOR_RGB2GRAY);
 
     //first get derivatives, but use the kind that we need for our purposes, rather than the built in scharr or sobel derivatives. We will do this by getting the absolute value of the differences to each side of the the current pixel and then taking the max along each direction. The 
     Mat gx,gy,g1,g2;

@@ -7,7 +7,7 @@ cmake_policy(SET CMP0012 NEW)
 #message(STATUS ${CMAKE_MODULE_PATH})
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g -ggdb")
 
-find_package(OpenCV 3.1 REQUIRED)
+find_package(OpenCV REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(CUDA REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)

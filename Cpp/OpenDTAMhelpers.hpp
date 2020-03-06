@@ -13,7 +13,7 @@ void createPyramid(const Mat& image,vector<Mat>& pyramid,int& levels){
         Mat out;
 
         
-        resize(in,out,Size(),.5,.5,CV_INTER_AREA);
+        resize(in,out,Size(),.5,.5,cv::INTER_AREA);
         pyramid[l2]=out;
         in=out;
     }

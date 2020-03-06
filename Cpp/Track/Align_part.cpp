@@ -61,7 +61,7 @@ static Mat paramsToProjection(const Mat & p,const Mat& _cameraMatrix){
 
 static Mat&  makeGray(Mat& image){
     if (image.channels()!=1) {
-        cvtColor(image, image, CV_BGR2GRAY);
+        cvtColor(image, image, cv::COLOR_BGR2GRAY);
     }
     return image;
 }
@@ -77,7 +77,7 @@ static void getGradient(const Mat& image,Mat & grad){
     if (image.type()==CV_32FC1) {
         gray=image;
     }else {
-        cvtColor(image, gray, CV_BGR2GRAY);
+        cvtColor(image, gray, cv::COLOR_BGR2GRAY);
         gray.convertTo(gray,CV_32FC1);
     }
     Mat grad_x(image.rows,image.cols,CV_32FC1,grad.row(0).data);
@@ -97,7 +97,7 @@ static void getGradient_8(const Mat& image,Mat & grad){
     if (image.type()==CV_32FC1) {
         gray=image;
     }else {
-        cvtColor(image, gray, CV_BGR2GRAY);
+        cvtColor(image, gray, cv::COLOR_BGR2GRAY);
         gray.convertTo(gray,CV_32FC1);
     }
     Mat grad_x(image.rows,image.cols,CV_32FC1,grad.row(0).data);
@@ -117,7 +117,7 @@ static void getGradientInterleave(const Mat& image,Mat & grad){
     if (image.type()==CV_32FC1) {
         gray=image;
     }else {
-        cvtColor(image, gray, CV_BGR2GRAY);
+        cvtColor(image, gray, cv::COLOR_BGR2GRAY);
         gray.convertTo(gray,CV_32FC1);
     }
     Mat gradX(image.rows,image.cols,CV_32FC1);
@@ -189,11 +189,11 @@ bool Track::align_level_largedef_gray_forward(const Mat& T,//Total Mem cost ~185
         merge(toMerge,3,packed); //(Mem cost: min 3 load, 3 store :6)
         Mat pulledBack;
         
-        remap( packed, pulledBack, baseMap,Mat(), CV_INTER_LINEAR, BORDER_CONSTANT,0.0 );//(Mem cost:?? 5load, 3 store:8)
+        remap( packed, pulledBack, baseMap,Mat(), cv::INTER_LINEAR, BORDER_CONSTANT,0.0 );//(Mem cost:?? 5load, 3 store:8)
         gradI.create(r,c,CV_32FC2);
 
         int from_to[] = { 0,0, 1,1, 2,2 };
-        Mat src[1]=pulledBack;
+        Mat src[1]={pulledBack};
         Mat dst[2]={I,gradI};
         
         mixChannels(src,1,dst,2,from_to,3);// extract the image and the resampled gradient //(Mem cost: min 3 load, 3 store :6)
@@ -323,7 +323,7 @@ bool Track::align_level_largedef_gray_forward(const Mat& T,//Total Mem cost ~185
 //         Mat newMap,newBack;
 //         Mat newProj=paramsToProjection(tmp,cameraMatrix);
 //         perspectiveTransform(idMap3,newMap,newProj);
-//         remap( _I, newBack, newMap, Mat(), CV_INTER_LINEAR, BORDER_CONSTANT,-1.0/0.0 );
+//         remap( _I, newBack, newMap, Mat(), cv::INTER_LINEAR, BORDER_CONSTANT,-1.0/0.0 );
 //         Mat newFit;
 //         absdiff(T,newBack,newFit);
 //         Mat fitDiff;

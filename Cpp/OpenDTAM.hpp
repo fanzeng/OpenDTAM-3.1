@@ -157,7 +157,7 @@ class OpenDTAM{
                 tmp.fid=fid; 
                 tmp.im=new Mat(image);
                 tmp.gray=new Mat();
-                cvtColor(image, *(tmp.gray),CV_BGR2GRAY); 
+                cvtColor(image, *(tmp.gray),cv::COLOR_BGR2GRAY); 
                 tmp.R=R.clone(); 
                 tmp.T=T.clone(); 
                 tmp.reg2d=1; 
@@ -199,7 +199,7 @@ class OpenDTAM{
                 tmp.fid=fid; 
                 tmp.im=new Mat(image);
                 tmp.gray=new Mat();
-                cvtColor(image, *tmp.gray,CV_BGR2GRAY); 
+                cvtColor(image, *tmp.gray,cv::COLOR_BGR2GRAY); 
             }
             *newFp = tmp;
         }
@@ -224,7 +224,7 @@ class OpenDTAM{
         
         for (float scale=0.5; l2>=0; scale/=2, l2--) {
             Mat out;
-            resize(in,out,Size(),.5,.5,CV_INTER_AREA);
+            resize(in,out,Size(),.5,.5,cv::INTER_AREA);
             pyramid[l2]=out;
             in=out;
         }
